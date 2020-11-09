@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>SportAsso</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!--Favicon -->
+    <link rel="icon" type="image/png" href="~/Content/template/images/site.jpg" />
+
+    <!-- CSS Files -->
+
+    <link rel="stylesheet" href="~/Content/template/css/reset.css" />
+    <link rel="stylesheet" href="~/Content/template/css/animate.min.css" />
+    <link rel="stylesheet" href="~/Content/template/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/template/css/style.css" />
+    <link rel="stylesheet" href="~/Content/template/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/Content/template/css/owl.carousel.css" />
+    <link rel="stylesheet" href="~/Content/template/css/responsive.css" />
+    <link rel="stylesheet" href="~/Content/template/css/player/YTPlayer.css" />
+    <link href="css/pro-bars.css" rel="stylesheet" />
+
+
+    <!-- End CSS Files -->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <section id="navigation" class="dark-nav">
+        <!-- Navigation Inner -->
+        <div class="nav-inner">
+            <!-- Site Logo -->
+            <div class="site-logo fancy">
+                <a href="/Home" id="logo-text" class="scroll logo">
+                    <img src="~/Content/template/images/logo-icon2.png" width="100" alt="Logo" />
+                    SportAsso
+                </a>
+            </div><!-- End Site Logo -->
+            <a class="mini-nav-button gray2"><i class="fa fa-bars"></i></a>
+            <!-- Navigation Menu -->
+            <div class="nav-menu">
+                <ul class="nav uppercase">
+
+                    <li><a href="/Home/Disciplines" class="scroll">Disciplines</a></li>
+                    <li><a href="/Home/Encadrants" class="scroll">Encadrants</a></li>
+                    <li><a href="/Home/Contact" class="scroll">Contact</a></li>
+                    <li><a href="/Account/Register" class="scroll">S'inscrire</a></li>
+                    <li><a href="/Account/Login" class="scroll">Se connecter</a></li>
+                </ul>
+            </div><!-- End Navigation Menu -->
+        </div><!-- End Navigation Inner -->
+    </section><!-- End Navigation Section -->
+    <!-- Home Section -->
+
+    @RenderBody()
+
+
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <!-- Your Company Name -->
+        <img src="~/Content/template/images/logo-icon.png" width="70" alt="Logo" />
+        <!-- Copyright -->
+        <p class="copyright normal">
+            © 2020 <span class="colored">SportAsso.</span> Pauline Chanut - Sihem Benazouaou.<br>
+            All Rights Reserved.
+        </p>
+    </footer><!-- End Footer -->
+    <!-- JS Files -->
+
+
+    <script type="text/javascript" src="~/Content/template/JS/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.appear.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/modernizr-latest.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/SmoothScroll.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.parallax-1.1.3.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.superslides.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.mb.YTPlayer.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/jquery.slabtext.js"></script>
+    <script type="text/javascript" src="~/Content/template/JS/plugins.js"></script>
+
+    <script>
+
+
+
+        $("a.about-icon").hover(function () {
+            $(this).children("i").addClass("fa-spin");
+        }, function () {
+            $(this).children("i").removeClass("fa-spin");
+        });
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+
+
+</body>
+
+</html >
