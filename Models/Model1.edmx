@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SportAsso_BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Creneau">
+          <Key>
+            <PropertyRef Name="Id_Creneau" />
+          </Key>
+          <Property Name="Id_Creneau" Type="int" Nullable="false" />
+          <Property Name="Nombre_Places_Dispo" Type="int" Nullable="false" />
+          <Property Name="Nombre_Places_Max" Type="int" Nullable="false" />
+          <Property Name="Section_Id_Section" Type="int" Nullable="false" />
+          <Property Name="Lieu_Id_Lieu" Type="int" Nullable="false" />
+          <Property Name="Encadrant" Type="int" Nullable="false" />
+          <Property Name="Jour" Type="varchar" MaxLength="50" />
+          <Property Name="Heure" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="Id_Discipline" />
+          </Key>
+          <Property Name="Id_Discipline" Type="int" Nullable="false" />
+          <Property Name="Nom_Discipline" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id_Doc" />
+          </Key>
+          <Property Name="Id_Doc" Type="int" Nullable="false" />
+          <Property Name="Type_Document" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Dossier_Id_Dossier" Type="int" Nullable="false" />
+          <Property Name="Fichier" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Est_Valide" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Dossier">
+          <Key>
+            <PropertyRef Name="Id_Dossier" />
+          </Key>
+          <Property Name="Id_Dossier" Type="int" Nullable="false" />
+          <Property Name="Paiement" Type="tinyint" Nullable="false" />
+          <Property Name="Personne_Id_Personne" Type="int" Nullable="false" />
+          <Property Name="Section_Id_Section" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inscrits">
+          <Key>
+            <PropertyRef Name="Personne_Id_Personne" />
+            <PropertyRef Name="Creneau_Id_Creneau" />
+          </Key>
+          <Property Name="Personne_Id_Personne" Type="int" Nullable="false" />
+          <Property Name="Creneau_Id_Creneau" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lieu">
+          <Key>
+            <PropertyRef Name="Id_Lieu" />
+          </Key>
+          <Property Name="Id_Lieu" Type="int" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="Id_Personne" />
+          </Key>
+          <Property Name="Id_Personne" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_Naissance" Type="date" Nullable="false" />
+          <Property Name="E_mail" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Num_Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sexe" Type="varchar" MaxLength="10" />
+          <Property Name="Mot_de_Passe" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personne_has_Role">
+          <Key>
+            <PropertyRef Name="Personne_Id_Personne" />
+            <PropertyRef Name="Role_Id_Role" />
+          </Key>
+          <Property Name="Personne_Id_Personne" Type="int" Nullable="false" />
+          <Property Name="Role_Id_Role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="int" Nullable="false" />
+          <Property Name="Nom_Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Id_Section" />
+          </Key>
+          <Property Name="Id_Section" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prix" Type="decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="Discipline_Id_Discipline" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="fk_Creneau_Lieu1">
+          <End Role="Lieu" Type="Self.Lieu" Multiplicity="1" />
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieu">
+              <PropertyRef Name="Id_Lieu" />
+            </Principal>
+            <Dependent Role="Creneau">
+              <PropertyRef Name="Lieu_Id_Lieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Creneau_Personne1">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id_Personne" />
+            </Principal>
+            <Dependent Role="Creneau">
+              <PropertyRef Name="Encadrant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Creneau_Section1">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id_Section" />
+            </Principal>
+            <Dependent Role="Creneau">
+              <PropertyRef Name="Section_Id_Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Document_Dossier1">
+          <End Role="Dossier" Type="Self.Dossier" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossier">
+              <PropertyRef Name="Id_Dossier" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="Dossier_Id_Dossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Dossier_Personne1">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Dossier" Type="Self.Dossier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id_Personne" />
+            </Principal>
+            <Dependent Role="Dossier">
+              <PropertyRef Name="Personne_Id_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Dossier_Section1">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Dossier" Type="Self.Dossier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id_Section" />
+            </Principal>
+            <Dependent Role="Dossier">
+              <PropertyRef Name="Section_Id_Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Personne_has_Creneau_Creneau1">
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="1" />
+          <End Role="Inscrits" Type="Self.Inscrits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creneau">
+              <PropertyRef Name="Id_Creneau" />
+            </Principal>
+            <Dependent Role="Inscrits">
+              <PropertyRef Name="Creneau_Id_Creneau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Personne_has_Créneau_Personne1">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Inscrits" Type="Self.Inscrits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id_Personne" />
+            </Principal>
+            <Dependent Role="Inscrits">
+              <PropertyRef Name="Personne_Id_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Personne_has_Role_Personne1">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Personne_has_Role" Type="Self.Personne_has_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id_Personne" />
+            </Principal>
+            <Dependent Role="Personne_has_Role">
+              <PropertyRef Name="Personne_Id_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Personne_has_Role_Role1">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Personne_has_Role" Type="Self.Personne_has_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="Personne_has_Role">
+              <PropertyRef Name="Role_Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Section_Discipline1">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="Id_Discipline" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="Discipline_Id_Discipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SportAsso_BDDModelStoreContainer">
+          <EntitySet Name="Creneau" EntityType="Self.Creneau" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dossier" EntityType="Self.Dossier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inscrits" EntityType="Self.Inscrits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lieu" EntityType="Self.Lieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personne" EntityType="Self.Personne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personne_has_Role" EntityType="Self.Personne_has_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Creneau_Lieu1" Association="Self.fk_Creneau_Lieu1">
+            <End Role="Lieu" EntitySet="Lieu" />
+            <End Role="Creneau" EntitySet="Creneau" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Creneau_Personne1" Association="Self.fk_Creneau_Personne1">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Creneau" EntitySet="Creneau" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Creneau_Section1" Association="Self.fk_Creneau_Section1">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Creneau" EntitySet="Creneau" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Document_Dossier1" Association="Self.fk_Document_Dossier1">
+            <End Role="Dossier" EntitySet="Dossier" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Dossier_Personne1" Association="Self.fk_Dossier_Personne1">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Dossier" EntitySet="Dossier" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Dossier_Section1" Association="Self.fk_Dossier_Section1">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Dossier" EntitySet="Dossier" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Personne_has_Creneau_Creneau1" Association="Self.fk_Personne_has_Creneau_Creneau1">
+            <End Role="Creneau" EntitySet="Creneau" />
+            <End Role="Inscrits" EntitySet="Inscrits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Personne_has_Créneau_Personne1" Association="Self.fk_Personne_has_Créneau_Personne1">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Inscrits" EntitySet="Inscrits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Personne_has_Role_Personne1" Association="Self.fk_Personne_has_Role_Personne1">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Personne_has_Role" EntitySet="Personne_has_Role" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Personne_has_Role_Role1" Association="Self.fk_Personne_has_Role_Role1">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Personne_has_Role" EntitySet="Personne_has_Role" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Section_Discipline1" Association="Self.fk_Section_Discipline1">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SportAsso_BDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Creneau">
+          <Key>
+            <PropertyRef Name="Id_Creneau" />
+          </Key>
+          <Property Name="Id_Creneau" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Places_Dispo" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Places_Max" Type="Int32" Nullable="false" />
+          <Property Name="Section_Id_Section" Type="Int32" Nullable="false" />
+          <Property Name="Lieu_Id_Lieu" Type="Int32" Nullable="false" />
+          <Property Name="Encadrant" Type="Int32" Nullable="false" />
+          <Property Name="Jour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Heure" Type="Time" Precision="7" />
+          <NavigationProperty Name="Lieu" Relationship="Self.fk_Creneau_Lieu1" FromRole="Creneau" ToRole="Lieu" />
+          <NavigationProperty Name="Personne" Relationship="Self.fk_Creneau_Personne1" FromRole="Creneau" ToRole="Personne" />
+          <NavigationProperty Name="Section" Relationship="Self.fk_Creneau_Section1" FromRole="Creneau" ToRole="Section" />
+          <NavigationProperty Name="Personne1" Relationship="Self.Inscrits" FromRole="Creneau" ToRole="Personne" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="Id_Discipline" />
+          </Key>
+          <Property Name="Id_Discipline" Type="Int32" Nullable="false" />
+          <Property Name="Nom_Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Section" Relationship="Self.fk_Section_Discipline1" FromRole="Discipline" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id_Doc" />
+          </Key>
+          <Property Name="Id_Doc" Type="Int32" Nullable="false" />
+          <Property Name="Type_Document" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dossier_Id_Dossier" Type="Int32" Nullable="false" />
+          <Property Name="Fichier" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Est_Valide" Type="Byte" />
+          <NavigationProperty Name="Dossier" Relationship="Self.fk_Document_Dossier1" FromRole="Document" ToRole="Dossier" />
+        </EntityType>
+        <EntityType Name="Dossier">
+          <Key>
+            <PropertyRef Name="Id_Dossier" />
+          </Key>
+          <Property Name="Id_Dossier" Type="Int32" Nullable="false" />
+          <Property Name="Paiement" Type="Byte" Nullable="false" />
+          <Property Name="Personne_Id_Personne" Type="Int32" Nullable="false" />
+          <Property Name="Section_Id_Section" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Self.fk_Document_Dossier1" FromRole="Dossier" ToRole="Document" />
+          <NavigationProperty Name="Personne" Relationship="Self.fk_Dossier_Personne1" FromRole="Dossier" ToRole="Personne" />
+          <NavigationProperty Name="Section" Relationship="Self.fk_Dossier_Section1" FromRole="Dossier" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Lieu">
+          <Key>
+            <PropertyRef Name="Id_Lieu" />
+          </Key>
+          <Property Name="Id_Lieu" Type="Int32" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Creneau" Relationship="Self.fk_Creneau_Lieu1" FromRole="Lieu" ToRole="Creneau" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="Id_Personne" />
+          </Key>
+          <Property Name="Id_Personne" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_Naissance" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="E_mail" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Num_Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mot_de_Passe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Creneau" Relationship="Self.fk_Creneau_Personne1" FromRole="Personne" ToRole="Creneau" />
+          <NavigationProperty Name="Dossier" Relationship="Self.fk_Dossier_Personne1" FromRole="Personne" ToRole="Dossier" />
+          <NavigationProperty Name="Creneau1" Relationship="Self.Inscrits" FromRole="Personne" ToRole="Creneau" />
+          <NavigationProperty Name="Role" Relationship="Self.Personne_has_Role" FromRole="Personne" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="Int32" Nullable="false" />
+          <Property Name="Nom_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Personne" Relationship="Self.Personne_has_Role" FromRole="Role" ToRole="Personne" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Id_Section" />
+          </Key>
+          <Property Name="Id_Section" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prix" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="Discipline_Id_Discipline" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Creneau" Relationship="Self.fk_Creneau_Section1" FromRole="Section" ToRole="Creneau" />
+          <NavigationProperty Name="Discipline" Relationship="Self.fk_Section_Discipline1" FromRole="Section" ToRole="Discipline" />
+          <NavigationProperty Name="Dossier" Relationship="Self.fk_Dossier_Section1" FromRole="Section" ToRole="Dossier" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="fk_Creneau_Lieu1">
+          <End Role="Lieu" Type="Self.Lieu" Multiplicity="1" />
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieu">
+              <PropertyRef Name="Id_Lieu" />
+            </Principal>
+            <Dependent Role="Creneau">
+              <PropertyRef Name="Lieu_Id_Lieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Creneau_Personne1">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id_Personne" />
+            </Principal>
+            <Dependent Role="Creneau">
+              <PropertyRef Name="Encadrant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Creneau_Section1">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id_Section" />
+            </Principal>
+            <Dependent Role="Creneau">
+              <PropertyRef Name="Section_Id_Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Section_Discipline1">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="Id_Discipline" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="Discipline_Id_Discipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Document_Dossier1">
+          <End Role="Dossier" Type="Self.Dossier" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossier">
+              <PropertyRef Name="Id_Dossier" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="Dossier_Id_Dossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Dossier_Personne1">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Dossier" Type="Self.Dossier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Id_Personne" />
+            </Principal>
+            <Dependent Role="Dossier">
+              <PropertyRef Name="Personne_Id_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Dossier_Section1">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Dossier" Type="Self.Dossier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id_Section" />
+            </Principal>
+            <Dependent Role="Dossier">
+              <PropertyRef Name="Section_Id_Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Inscrits">
+          <End Role="Creneau" Type="Self.Creneau" Multiplicity="*" />
+          <End Role="Personne" Type="Self.Personne" Multiplicity="*" />
+        </Association>
+        <Association Name="Personne_has_Role">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SportAsso_BDDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Creneau" EntityType="Self.Creneau" />
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" />
+          <EntitySet Name="Document" EntityType="Self.Document" />
+          <EntitySet Name="Dossier" EntityType="Self.Dossier" />
+          <EntitySet Name="Lieu" EntityType="Self.Lieu" />
+          <EntitySet Name="Personne" EntityType="Self.Personne" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Section" EntityType="Self.Section" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="fk_Creneau_Lieu1" Association="Self.fk_Creneau_Lieu1">
+            <End Role="Lieu" EntitySet="Lieu" />
+            <End Role="Creneau" EntitySet="Creneau" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Creneau_Personne1" Association="Self.fk_Creneau_Personne1">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Creneau" EntitySet="Creneau" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Creneau_Section1" Association="Self.fk_Creneau_Section1">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Creneau" EntitySet="Creneau" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Section_Discipline1" Association="Self.fk_Section_Discipline1">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Document_Dossier1" Association="Self.fk_Document_Dossier1">
+            <End Role="Dossier" EntitySet="Dossier" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Dossier_Personne1" Association="Self.fk_Dossier_Personne1">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Dossier" EntitySet="Dossier" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Dossier_Section1" Association="Self.fk_Dossier_Section1">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Dossier" EntitySet="Dossier" />
+          </AssociationSet>
+          <AssociationSet Name="Inscrits" Association="Self.Inscrits">
+            <End Role="Creneau" EntitySet="Creneau" />
+            <End Role="Personne" EntitySet="Personne" />
+          </AssociationSet>
+          <AssociationSet Name="Personne_has_Role" Association="Self.Personne_has_Role">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SportAsso_BDDModelStoreContainer" CdmEntityContainer="SportAsso_BDDEntities">
+          <EntitySetMapping Name="Creneau">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Creneau">
+              <MappingFragment StoreEntitySet="Creneau">
+                <ScalarProperty Name="Id_Creneau" ColumnName="Id_Creneau" />
+                <ScalarProperty Name="Nombre_Places_Dispo" ColumnName="Nombre_Places_Dispo" />
+                <ScalarProperty Name="Nombre_Places_Max" ColumnName="Nombre_Places_Max" />
+                <ScalarProperty Name="Section_Id_Section" ColumnName="Section_Id_Section" />
+                <ScalarProperty Name="Lieu_Id_Lieu" ColumnName="Lieu_Id_Lieu" />
+                <ScalarProperty Name="Encadrant" ColumnName="Encadrant" />
+                <ScalarProperty Name="Jour" ColumnName="Jour" />
+                <ScalarProperty Name="Heure" ColumnName="Heure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discipline">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Discipline">
+              <MappingFragment StoreEntitySet="Discipline">
+                <ScalarProperty Name="Id_Discipline" ColumnName="Id_Discipline" />
+                <ScalarProperty Name="Nom_Discipline" ColumnName="Nom_Discipline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Document">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Id_Doc" ColumnName="Id_Doc" />
+                <ScalarProperty Name="Type_Document" ColumnName="Type_Document" />
+                <ScalarProperty Name="Dossier_Id_Dossier" ColumnName="Dossier_Id_Dossier" />
+                <ScalarProperty Name="Fichier" ColumnName="Fichier" />
+                <ScalarProperty Name="Est_Valide" ColumnName="Est_Valide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dossier">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Dossier">
+              <MappingFragment StoreEntitySet="Dossier">
+                <ScalarProperty Name="Id_Dossier" ColumnName="Id_Dossier" />
+                <ScalarProperty Name="Paiement" ColumnName="Paiement" />
+                <ScalarProperty Name="Personne_Id_Personne" ColumnName="Personne_Id_Personne" />
+                <ScalarProperty Name="Section_Id_Section" ColumnName="Section_Id_Section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lieu">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Lieu">
+              <MappingFragment StoreEntitySet="Lieu">
+                <ScalarProperty Name="Id_Lieu" ColumnName="Id_Lieu" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personne">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Personne">
+              <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="Id_Personne" ColumnName="Id_Personne" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Date_Naissance" ColumnName="Date_Naissance" />
+                <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+                <ScalarProperty Name="Num_Telephone" ColumnName="Num_Telephone" />
+                <ScalarProperty Name="Sexe" ColumnName="Sexe" />
+                <ScalarProperty Name="Mot_de_Passe" ColumnName="Mot_de_Passe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Nom_Role" ColumnName="Nom_Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="Id_Section" ColumnName="Id_Section" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Discipline_Id_Discipline" ColumnName="Discipline_Id_Discipline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SportAsso_BDDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Inscrits" TypeName="SportAsso_BDDModel.Inscrits" StoreEntitySet="Inscrits">
+            <EndProperty Name="Creneau">
+              <ScalarProperty Name="Id_Creneau" ColumnName="Creneau_Id_Creneau" />
+            </EndProperty>
+            <EndProperty Name="Personne">
+              <ScalarProperty Name="Id_Personne" ColumnName="Personne_Id_Personne" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Personne_has_Role" TypeName="SportAsso_BDDModel.Personne_has_Role" StoreEntitySet="Personne_has_Role">
+            <EndProperty Name="Personne">
+              <ScalarProperty Name="Id_Personne" ColumnName="Personne_Id_Personne" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="Id_Role" ColumnName="Role_Id_Role" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
