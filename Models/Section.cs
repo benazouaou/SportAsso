@@ -21,7 +21,7 @@ namespace first_site_web.Models
             this.Dossier = new HashSet<Dossier>();
         }
     
-        public int Id_Section { get; set; }
+        public int SectionId { get; set; }
         public string Nom { get; set; }
         public decimal Prix { get; set; }
         public int Discipline_Id_Discipline { get; set; }

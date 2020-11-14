@@ -20,7 +20,7 @@ namespace first_site_web.Models
             this.Personne1 = new HashSet<Personne>();
         }
     
-        public int Id_Creneau { get; set; }
+        public int CreneauId { get; set; }
         public int Nombre_Places_Dispo { get; set; }
         public int Nombre_Places_Max { get; set; }
         public int Section_Id_Section { get; set; }

@@ -20,7 +20,7 @@ namespace first_site_web.Models
             this.Document = new HashSet<Document>();
         }
     
-        public int Id_Dossier { get; set; }
+        public int DossierId { get; set; }
         public byte Paiement { get; set; }
         public int Personne_Id_Personne { get; set; }
         public int Section_Id_Section { get; set; }

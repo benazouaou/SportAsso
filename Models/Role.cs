@@ -20,7 +20,7 @@ namespace first_site_web.Models
             this.Personne = new HashSet<Personne>();
         }
     
-        public int Id_Role { get; set; }
+        public int RoleId { get; set; }
         public string Nom_Role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

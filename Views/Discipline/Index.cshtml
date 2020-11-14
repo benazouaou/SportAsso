@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>Ici s'affichera la liste des disciplines</div>
+<ul>
+    @foreach(var discipline in ViewBag.Disciplines as List<first_site_web.Models.Discipline>)
+    {
+        <li><a href="/Discipline/@discipline.Nom_Discipline">@discipline.Nom_Discipline</a></li>
+    }
+</ul>
+
+
+
+
+    
+
+

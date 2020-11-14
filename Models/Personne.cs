@@ -23,7 +23,7 @@ namespace first_site_web.Models
             this.Role = new HashSet<Role>();
         }
     
-        public int Id_Personne { get; set; }
+        public int PersonneId { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public System.DateTime Date_Naissance { get; set; }

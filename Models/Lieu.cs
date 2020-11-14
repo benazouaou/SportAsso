@@ -20,7 +20,7 @@ namespace first_site_web.Models
             this.Creneau = new HashSet<Creneau>();
         }
     
-        public int Id_Lieu { get; set; }
+        public int LieuId { get; set; }
         public string Adresse { get; set; }
         public string Nom { get; set; }
     

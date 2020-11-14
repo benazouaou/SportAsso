@@ -14,7 +14,7 @@ namespace first_site_web.Models
     
     public partial class Document
     {
-        public int Id_Doc { get; set; }
+        public int DocumentId { get; set; }
         public string Type_Document { get; set; }
         public int Dossier_Id_Dossier { get; set; }
         public byte[] Fichier { get; set; }
